@@ -1,0 +1,30 @@
+{{ define "title" }}Login - My Web App{{ end }}
+
+{{ define "content" }}
+    <div class="form-container">
+        <h2>Giriş Yap</h2>
+        <form action="/login.html" method="POST">
+            <label for="email">Email Adresi</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+            <label for="password">Parola</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+
+            <div class="remember-me">
+                <input type="checkbox" id="remember-me" name="remember-me">
+                <label for="remember-me">Beni Hatırla</label>
+                <a href="#" style="margin-left:auto;">Parolamı Unuttum</a>
+            </div>
+
+            <button type="submit" class="btn">Giriş Yap</button>
+
+            <div class="footer">
+                Henüz üye değil misin? <a href="register.html">Hesap oluştur.</a>
+            </div>
+        </form>
+        <div class="social-login">
+            <button onclick="window.location.href='/auth/github'" class="btn github-btn">GitHub ile Giriş Yap</button>
+            <button onclick="window.location.href='/auth/google'" class="btn google-btn">Google ile Giriş Yap</button>
+        </div>
+    </div>
+{{ end }}

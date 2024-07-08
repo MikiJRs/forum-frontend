@@ -1,0 +1,24 @@
+{{define "navbar"}}
+<header>
+    <nav>
+        <div class="navbar-left">
+            <a href="/" class="logo">
+                <span class="sr-only">Your Company</span>
+                <img class="logo-img" src="/web/static/logo.png" alt="">
+            </a>
+        </div>
+
+
+        {{template "search" .}}
+        <div class="menu-login">
+            {{if and .Username (ne .Username "Guest") }}
+            <span>Hoş geldin, {{.Username}}</span>
+                <a href="/logout">Çıkış Yap</a>
+            {{else}}
+                <a href="register.html">kayıt ol</a>
+                <a href="login.html">giriş yap</a>
+            {{end}}
+        </div>
+    </nav>
+</header>
+{{end}}

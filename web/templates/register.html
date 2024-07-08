@@ -1,0 +1,37 @@
+{{ define "title" }}Register - My Web App{{ end }}
+
+{{ define "content" }}
+    <div class="form-container">
+        {{ if .Success }}
+        {{if .Username}}
+        <span>Hoş geldin, {{.Username}}</span>
+        <a href="/logout">Çıkış Yap</a>
+    {{else}}
+        <a href="register.html">kayıt ol</a>
+        <a href="login.html">giriş yap</a>
+    {{end}}
+        {{ else }}
+            <h2>Kayıt Ol</h2>
+            <form action="/register" method="POST">
+                <label for="username">Kullanıcı Adı</label>
+                <input type="text" id="username" name="username" placeholder="username" value="{{ .Username }}" required>
+
+                <label for="email">Email Adresi</label>
+                <input type="email" id="email" name="email" placeholder="example@email.com" value="{{ .Email }}" required>
+
+                <label for="password">Parola</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" value="{{ .Password }}" required>
+
+                <button type="submit" class="btn">Kayıt Ol</button>
+
+                <div class="footer">
+                    Zaten bir hesabın var mı? <a href="login.html">Giriş Yap!</a>
+                </div>
+            </form>
+            <div class="social-login">
+                <button onclick="window.location.href='/auth/github'" class="btn github-btn">GitHub ile Kayıt Ol</button>
+                <button onclick="window.location.href='/auth/google'" class="btn google-btn">Google ile Kayıt Ol</button>
+            </div>
+        {{ end }}
+    </div>
+{{ end }}

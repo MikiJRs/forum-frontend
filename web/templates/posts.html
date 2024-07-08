@@ -1,0 +1,103 @@
+{{ define "posts" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <style>
+        .post-container {
+            display: flex;
+            flex-direction: column; /* Change to column for vertical alignment */
+            align-items: center;
+            margin: 20px;
+        }
+
+        /* Card style for each post */
+        .post {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 80%; /* Adjust width as needed */
+            box-sizing: border-box;
+            transition: transform 0.2s;
+        }
+
+        /* Hover effect for the card */
+        .post:hover {
+            transform: scale(1.05);
+        }
+
+        /* Centered title */
+        .post h2 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Content styling */
+        .post p {
+            font-size: 1em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Small text for author or other details */
+        .post small {
+            display: block;
+            text-align: right;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .post-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            min-height: 150px;
+            height: 150px;
+            background-color: #EEEEEE;
+            border-radius: 10px;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .post-footer span {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    {{if .Username}}
+    <div>
+        <button onclick="window.location.href='/add-post'" style="position: fixed;  right: 20px;">Add New Post</button>
+    </div>
+    {{ end}}
+    <div class="post-container">
+        
+        {{ range .Posts }}
+        <div class="post" onclick="window.location.href='/post/{{ .ID }}'">
+            <h2>{{ .Title }}</h2>
+            <p>{{ .Content }}</p>
+            <div class="post-footer">
+                <span>Comments: {{  .CommentLength }}</span> <!-- Display the length of the Comments slice -->
+                <span>Likes: {{ .Likes }}</span>
+                <small style="display: block; text-align: right; color: #999; margin-top: 10px;">{{ .Author }}</small>
+            </div>
+        </div>
+        {{ else }}
+        <p>No posts available.</p>
+        {{ end }}
+    </div>
+</body>
+</html>
+{{ end }}
