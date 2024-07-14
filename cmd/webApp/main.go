@@ -1,9 +1,10 @@
 package main
 
 import (
-	"golang-forum-frontend/internal/handler"
 	"log"
 	"net/http"
+
+	"golang-forum-frontend/internal/handler"
 
 	"github.com/gorilla/mux"
 )
@@ -27,9 +28,15 @@ func main() {
 	router.HandleFunc("/get-post-comments", handler.GetPostCommentsHandler).Methods("GET")
 	router.HandleFunc("/add-post", handler.AddPostHandler).Methods("GET")
 	router.HandleFunc("/add-post", handler.AddPostSubmitHandler).Methods("POST")
-	//router.HandleFunc("/search", handler.SearchHandler).Methods("GET")
+	// router.HandleFunc("/search", handler.SearchHandler).Methods("GET")
 	router.HandleFunc("/add-comment", handler.AddCommentHandler).Methods("POST")
 
+	router.HandleFunc("/login/google", handler.HandleGoogleLogin)
+	router.HandleFunc("/callback/google", handler.HandleGoogleCallback)
+	router.HandleFunc("/login/github", handler.HandleGitHubLogin)
+	router.HandleFunc("/callback/github", handler.HandleGitHubCallback)
+
+	handler.LoadEnv()
 	// Starting the server
 	log.Println("Starting server on :8081")
 	if err := http.ListenAndServe(":8081", router); err != nil {
